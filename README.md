@@ -1,43 +1,48 @@
 # AMR Silver Data for Ensemble Distillation
 
-This repository hosts the details and instructions for accessing a high-quality silver dataset for Abstract Meaning Representation (AMR) parsing. The dataset has been created by integrating carefully selected subsets from the GLUE benchmark and the EdinburghNLP/XSum dataset, to provide a robust collection of sentences for AMR representation learning.
+This repository contains details and instructions for accessing a high-quality silver dataset for Abstract Meaning Representation (AMR) parsing, consisting of 362,000 sentence-AMR pairs. The dataset is created through an ensemble distillation process, combining multiple AMR parsers to produce reliable AMR annotations for robust model training.
 
 ## About the Dataset
-The silver dataset is generated using ensemble distillation techniques with three instances of the AMR3-structbart-Large model, trained on the AMR 3.0 dataset. These models were selected for their ability to produce more accurate AMR graphs with reduced noise, focusing on sentence diversity and high-quality annotation.
+The silver dataset was generated using the Maximum Bayes Smatch Ensemble Distillation (MBSE) technique, which leverages outputs from different pre-trained AMR parsers. The dataset aims to provide extensive linguistic diversity and varied sentence structures, contributing to the development of advanced AMR parsing models.
 
-### Data Sources
-- **GLUE Benchmark**: Subsets included are:
-  - **AX**: Manually-curated for linguistic analysis across diverse phenomena.
-  - **CoLA (Corpus of Linguistic Acceptability)**: Sentences marked as grammatically acceptable.
-  - **MRPC (Microsoft Research Paraphrase Corpus)**: Sentence pairs annotated for semantic equivalence.
-  - **QNLI (Question Natural Language Inference)**: Questions and their corresponding sentences to introduce varied sentence structures.
+### Key Features
+- **362,000 Sentence-AMR Pairs**: Making it one of the largest silver datasets for AMR parsing.
+- **Enhanced Model Performance**: The increased size of the training corpus has shown a positive impact on the performance of the student model, resulting in higher Smatch scores.
+- **Diverse Annotations**: Uses multiple models with different seed releases for a comprehensive set of AMR graphs.
 
-- **EdinburghNLP/XSum**: Contains abstractive summaries, focusing on concise, varied, and high-quality summary sentences to enhance the diversity of the silver dataset.
+## Maximum Bayes Smatch Ensemble Distillation (MBSE)
+The **MBSE** method is a Smatch-based ensembling technique that generates high-quality AMR annotations by combining the outputs of multiple teacher models. This ensemble output is used as distillation knowledge for training a student model.
 
-### AMR Parsing Model
-The AMR3-structbart-Large model was used for generating AMR graphs. Three different seed releases of the model from IBM Research were utilized to create an ensemble distillation, leveraging action sequences to improve the quality of the AMR annotations.
+### Methodology
+- **Trained Parsers**:  
+  We employed three instances of the **AMR3-structbart-Large** model, each trained on the gold-labeled **AMR 3.0** dataset with different seed releases from IBM Research. This model leverages action sequences, which produce more accurate AMR graphs with reduced noise.
+- **Parsing Unlabeled Text**:  
+  The trained parsers were used to annotate unlabelled English text, resulting in diverse samples of AMR parses.
+- **Smatch-Based Ensemble Algorithms**:  
+  Multiple Smatch-based algorithms, including **Graphene-Smatch**, **Greedy-Select**, and **Average-Smatch**, were tested to integrate outputs from the parsers. **Average-Smatch** was selected for its simplicity and competitive performance.
 
 ## Download the Dataset
-Due to the size of the dataset (1.4GB in total, with individual files up to 300MB), it is hosted on Google Drive. You can download the dataset using the link below:
+The silver AMR dataset is available for download from Google Drive. Due to the size constraints of GitHub, the dataset is hosted externally. 
 
-📦 [Download the Silver AMR Dataset](https://drive.google.com/drive/folders/1qdNhJQQ9VEljP-Asz43iqfDre9rKxbFv?usp=sharing)
+📦 [Download the Final Ensembled Silver AMR Dataset (362,000 sentence-AMR pairs)](https://drive.google.com/file/d/1tDmZwRZj9h81guDO0meZZQq5PRf00L0B/view?usp=sharing)
 
-Simply follow the link to access and download the full dataset.
+Alternatively, the dataset can be accessed in the silver dataset from the three IBM_Research amr parsers before applying the ensemble method from [this link](https://drive.google.com/drive/folders/1qdNhJQQ9VEljP-Asz43iqfDre9rKxbFv?usp=sharing).
 
 ## Usage and License
-This dataset is open for research and non-commercial use to aid in the advancement of AMR parsing techniques. If you use this dataset in your work, please consider citing the original sources of the GLUE subsets, XSum dataset, and the AMR3-structbart-Large model.
+This dataset is open for research and non-commercial use to aid in the advancement of AMR parsing techniques. If you use this dataset in your work, please consider citing the original sources, as well as the papers related to the MBSE methodology and AMR parsing models.
 
 ### Citation
-When using this dataset, please cite the original papers associated with each component of the dataset:
+When using this dataset, please cite the original works:
 
-- **GLUE Benchmark**: [Wang et al. (2019)](https://aclanthology.org/W19-4508/)
-- **CoLA**: [Warstadt et al. (2018)](https://aclanthology.org/P18-2124/)
-- **MRPC**: [Dolan & Brockett (2005)](https://aclanthology.org/H05-1115/)
-- **QNLI**: [Rajpurkar et al. (2016)](https://aclanthology.org/Q16-1002/)
-- **XSum Dataset**: [Narayan et al. (2018)](https://aclanthology.org/D18-1206/)
-- **AMR3-structbart-Large Model**: [Zhou et al. (2021)](https://aclanthology.org/2021.acl-long.512/)
+- **GLUE Benchmark**: 
+- **CoLA**: 
+- **MRPC**: 
+- **QNLI**: 
+- **XSum Dataset**: 
+- **AMR3-structbart-Large Model**: 
+- **Maximum Bayes Smatch Ensemble Distillation**: 
 
 ## Contact
-For questions, suggestions, or collaboration opportunities, please reach out through [GitHub Issues](https://github.com/nj19257/AMR-silver-data-for-ensemble-distill/issues).
+For questions, suggestions, or collaboration opportunities, please reach out through issues
 
 Happy parsing! 🚀
